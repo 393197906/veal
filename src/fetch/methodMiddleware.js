@@ -1,23 +1,24 @@
+import {urlEncode} from "../util"
+
+export const GET = next => (...args) => {
+    const [url, params] = args
+    return next(`${url}?${urlEncode(params)}`, {
+        method: 'GET',
+    })
+};
 export const POST = next => (...args) => {
     const [url, params] = args
     return next(url, {
-        ...params,
+        body: params,
         method: 'POST',
     })
 };
 
-export const GET = next => (...args) => {
-    const [url, params] = args
-    return next(url, {
-        ...params,
-        method: 'GET',
-    })
-};
 
 export const DELETE = next => (...args) => {
     const [url, params] = args
     return next(url, {
-        ...params,
+        body: params,
         method: 'DELETE',
     })
 };
@@ -25,7 +26,7 @@ export const DELETE = next => (...args) => {
 export const PUT = next => (...args) => {
     const [url, params] = args
     return next(url, {
-        ...params,
+        body: params,
         method: 'PUT',
     })
 };

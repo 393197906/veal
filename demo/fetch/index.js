@@ -1,11 +1,11 @@
 const fetch = aook.createFetch(aook.applyMiddleware(
-    next=>(...params)=>{
-        console.log(params);
-        return next(...params)
-    }
-)).put
+    aook.logMiddleware
+)).get
 const url = "https://api.apiopen.top/recommendPoetry"
-fetch(url).then(result=>{
+fetch(url,{
+    name:123,
+    age:789
+}).then(result=>{
     console.log(result);
 });
 
