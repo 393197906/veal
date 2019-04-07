@@ -2,14 +2,14 @@ import {urlEncode} from "../util"
 
 export const GET = next => (...args) => {
     const [url, params] = args
-    return next(`${url}?${urlEncode(params)}`, {
+    return next(`${url}?${urlEncode(params).slice(1)}`, {
         method: 'GET',
     })
 };
 export const POST = next => (...args) => {
     const [url, params] = args
     return next(url, {
-        body: params,
+        body: JSON.stringify(params),
         method: 'POST',
     })
 };
@@ -18,7 +18,7 @@ export const POST = next => (...args) => {
 export const DELETE = next => (...args) => {
     const [url, params] = args
     return next(url, {
-        body: params,
+        body: JSON.stringify(params),
         method: 'DELETE',
     })
 };
@@ -26,7 +26,7 @@ export const DELETE = next => (...args) => {
 export const PUT = next => (...args) => {
     const [url, params] = args
     return next(url, {
-        body: params,
+        body: JSON.stringify(params),
         method: 'PUT',
     })
 };

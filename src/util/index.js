@@ -12,9 +12,11 @@ export const mergeOptions = (sOptions, eOptions) => {
             let option = soption;
             if(isPlainObject(soption)&& isPlainObject(eOption)){
                 option = mergeOptions(soption,eOption)
+                delete eOptions[key] // 删除多余属性
             }
             return {...container, [key]: option}
-        }, {}), ...eOptions
+        }, {}),
+        ...eOptions
     }
 }
 
@@ -43,7 +45,7 @@ export function curry (fn) {
 }
 
 
-const baseUrlEncode = (param, key, encode)=> {
+export  const urlEncode = (param, key, encode)=> {
     if (param==null) return '';
     let paramStr = '';
     const t = typeof (param);
@@ -57,4 +59,3 @@ const baseUrlEncode = (param, key, encode)=> {
     }
     return paramStr;
 }
-export const urlEncode = (...argv)=>baseUrlEncode(...argv).slice(1)

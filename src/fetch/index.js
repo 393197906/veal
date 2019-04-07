@@ -1,5 +1,5 @@
-import 'promise-polyfill/src/polyfill';
-import 'whatwg-fetch'
+// import 'promise-polyfill/src/polyfill';
+// import 'whatwg-fetch'
 import fetch from "./fetch"
 import {isFunction, compose} from "../util"
 import {GET, POST, DELETE, PUT,base} from "./methodMiddleware"

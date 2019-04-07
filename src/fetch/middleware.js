@@ -4,7 +4,7 @@
  * @returns {function(...[*]=): (Promise$1|PromiseLike<T | never>|Promise<T | never>)}
  */
 export const log = next => (...params) => {
-    const [url,argv] = params
+    const [url, argv] = params
     const start = Date.now()
     return next(...params).then(data => {
         const img = data.err
@@ -12,7 +12,7 @@ export const log = next => (...params) => {
             : 'http://pic.9ht.com/up/2018-2/15181644163000303.jpg'
         console.group('API接口调用')
         console.log('%c  ', `background:url("${img}");padding:45px;background-size:100%; background-repeat:no-repeat;`)
-        console.log(`%c URL 路径:`, 'color:#CC33CC',url)
+        console.log(`%c URL 路径:`, 'color:#CC33CC', url)
         // console.log(' ')
         console.log(`%c PARAMS 参数:`, 'color:#FF9933', argv)
         if (data.err) {
