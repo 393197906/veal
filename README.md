@@ -4,7 +4,7 @@
 > Provide web service API and common function
 
 ## core
-regexp
+* regexp
 ```javascript
 export const regexp = {
     number: /^[0-9]*\.?[0-9]*$/, // 数字
@@ -19,28 +19,28 @@ export const regexp = {
 * formatDate
 > (data:(string|number),fmt:string?)=> string
 
-`将时间戳格式化为日期字符串`
+> 将时间戳格式化为日期字符串
 
 * dateToStamp
 > (str:string,len:number=10?)=> number
 
-`将日期字符串转换为时间戳`
+> 将日期字符串转换为时间戳
 
 * deepClone
 > (source:object)=> object
 
-`深拷贝`
+> 深拷贝
 
 
 * sublen
 > (value:string,len:number=8?)=> string
 
-`字符串截取`
+> 字符串截取
 
 * fixedTo
 > (val:(string|number),len:number=4?)=> number
 
-`四舍五入保留n位小数`
+> 四舍五入保留n位小数
 
 * delayFn
 > (fn, delay, mustDelay)=> function
@@ -58,32 +58,32 @@ export const regexp = {
 * isFunction
 > (target:any)=> boolean
 
-`判断是不是函数`
+> 判断是不是函数
 
 * isPlainObject
 > (target:any)=> boolean
 
-`判断是不是字面量对象`
+> 判断是不是字面量对象
 
 * mergeOptions
 > (l:plainObject,r:plainObject)=> plainObject
 
-`深度合并对象`
+> 深度合并对象
 
 * compose
 > (...rest:Array<function>)=> function
 
-`函数管道`
+> 函数管道
 
 * curry
 > (function)=> function
 
-`柯里化函数工厂`
+> 柯里化函数工厂
 
 * urlEncode
 > (target:plainObject)=> string
 
-`转换对象为uri参数字符串`
+> 转换对象为uri参数字符串
 
 
 
