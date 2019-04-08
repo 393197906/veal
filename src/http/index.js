@@ -1,8 +1,8 @@
-// import 'promise-polyfill/src/polyfill';
-// import 'whatwg-fetch'
+import 'promise-polyfill/src/polyfill';
+import 'whatwg-fetch'
 import fetch from "./fetch"
 import {isFunction, compose} from "../core"
-export * from "./methodMiddleware"
+export * from "./middleware"
 
 /**
  * 创建fetch

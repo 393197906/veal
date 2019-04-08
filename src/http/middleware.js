@@ -1,9 +1,9 @@
 import {urlEncode} from "../core"
 
-export const methods = next =>{
+export const methods = next => {
     const methods = ['GET', 'POST', 'DELETE', 'PUT']
     const methodNames = ['get', 'post', 'del', 'put']
-    return methods.reduce((container, key,index) => {
+    return methods.reduce((container, key, index) => {
         if (key === 'GET') {
             return {
                 ...container,
@@ -28,38 +28,54 @@ export const methods = next =>{
     }, {})
 }
 
-export const filter = next => (...args) => {
-    return next(...args)
-    // handel html response
-        .then(response => {
-            if (response.status !== 200) {
-                throw new Error(response.statusText)
+export const filter = (errorHandler = () => {
+}, chain) => {
+    const defaultChain = response => {
+        if (response.status !== 200) {
+            throw new Error(response.statusText)
+        }
+        return response.json().then(data => {
+            if (
+                (data.hasOwnProperty("status") && (data['status'] !== true && parseInt(data['status']) !== 200))
+                ||
+                (data.hasOwnProperty("code") && (data['code'] !== true && parseInt(data['code']) !== 200))
+            ) {
+                throw new Error(data.message || data.msg || "error message not found")
             }
-            return response
+            return data
         })
-        // handle business response
-        .then(response => {
-            return response.json().then(data => {
-                if (
-                    (data.hasOwnProperty("status") && (data['status'] !== true && parseInt(data['status']) !== 200))
-                    ||
-                    (data.hasOwnProperty("code") && (data['code'] !== true && parseInt(data['code']) !== 200))
-                ) {
-                    throw new Error(data.message || data.msg || "error message not found")
-                }
-                return {
-                    json: () => Promise.resolve(data)
-                }
+    };
+    if (chain) {
+        if (typeof chain !== "function") {
+            console.warn("filter chain must be a function");
+        }
+    } else {
+        chain = defaultChain
+    }
+    return next => (...args) => {
+        return next(...args)
+            .then(chain)
+            // return data
+            .then(data => ({data}))
+            // return error
+            .catch(error => {
+                errorHandler(error)
+                return {err: error, data: {}}
             })
-        })
-        // return data
-        .then(response => {
-            return response.json().then(data => ({data}))
-        })
-        // return error
-        .catch(error => {
-            return {err: error, data: {}}
-        })
+    }
+};
+
+export const headers = (headers = {}) => next => (...argv) => {
+    let [url, params = {}] = argv
+    if (params.headers) {
+        params.headers = {
+            ...params.headers,
+            ...headers
+        }
+    } else {
+        params.headers = headers
+    }
+    return next(url, params)
 }
 
 
