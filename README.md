@@ -19,7 +19,7 @@ export const regexp = {
 * formatDate
 > (data:(string|number),fmt:string?)=> string
 
-将时间戳格式化为日期字符串
+`将时间戳格式化为日期字符串`
 
 * dateToStamp
 > (str:string,len:number=10?)=> number
