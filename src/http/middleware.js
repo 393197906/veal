@@ -1,4 +1,4 @@
-import {urlEncode} from "../core"
+import {urlEncode, isPlainObject} from "../core"
 
 export const methods = next => {
     const methods = ['GET', 'POST', 'DELETE', 'PUT']
@@ -20,7 +20,7 @@ export const methods = next => {
             [methodNames[index]]: (...args) => {
                 const [url, params] = args
                 return next(url, {
-                    body: JSON.stringify(params),
+                    body: isPlainObject(params) ? JSON.stringify(params) : params,
                     method: key,
                 })
             }
@@ -39,8 +39,10 @@ export const filter = (errorHandler = () => {
                 (data.hasOwnProperty("status") && (data['status'] !== true && parseInt(data['status']) !== 200))
                 ||
                 (data.hasOwnProperty("code") && (data['code'] !== true && parseInt(data['code']) !== 200))
+                ||
+                (data.hasOwnProperty("state") && (data['state'] !== true && parseInt(data['state']) !== 200))
             ) {
-                throw new Error(data.message || data.msg || "error message not found")
+                throw new Error(data.message || data.msg || data.ldata || "error message not found")
             }
             return data
         })

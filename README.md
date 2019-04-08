@@ -85,6 +85,52 @@ export const regexp = {
 
 > 转换对象为uri参数字符串
 
+## http
+
+* createFetch
+> (hof:function?)=> Fetch
+
+> fetch 工厂
+
+* applyMiddleware
+> (...middleware:Array<function>?)=> (Fecth|any)
+
+> 中间件加载器
+
+### http middlewares
+* log
+
+> 日志中间件
+
+* methods
+
+> 基础http方法中间件(会改变fetch的默认行为 生成一个 包含{get,post,del,put}方法的对象)
+
+> `NOTE:` 如果使用`methods`中间件，`methods`必须是`applyMiddleware`的第一个参数，因为`methods`会改变`fetch`的默认行为
+
+* filter
+> (errorHandler=()=>{}?,chain=(response)=>{/*...*/}?)=> middleware
+
+> errorHandler:error=>void 错误处理方法 
+
+> chain:response=>Promise<any> 自定义数据处理 
+
+* headers
+> (headers:plainObject)=>middleware
+
+> 设置`headers`
+
+### demo
+
+```javascript
+// base
+const fetch = createFetch();
+
+// advanced
+const fetch = createFetch(applyMiddleware(methods,filter(),log));
+```
+
+
 
 
 
