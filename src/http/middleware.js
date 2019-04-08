@@ -9,7 +9,8 @@ export const methods = next => {
                 ...container,
                 [methodNames[index]]: (...args) => {
                     const [url, params] = args
-                    return next(`${url}?${urlEncode(params).slice(1)}`, {
+                    const strParams = urlEncode(params).slice(1)
+                    return next(`${url}${strParams ? `?${strParams}` : ""}`, {
                         method: 'GET',
                     })
                 }
@@ -69,13 +70,17 @@ export const filter = (errorHandler = () => {
 
 export const headers = (headers = {}) => next => (...argv) => {
     let [url, params = {}] = argv
+    const handleHeaders = Object.keys(headers).reduce((conatiner, key) => {
+        const item = typeof headers[key] === "function" ? headers[key]() : headers[key]
+        return {...conatiner, [key]: item}
+    }, {})
     if (params.headers) {
         params.headers = {
             ...params.headers,
-            ...headers
+            ...handleHeaders
         }
     } else {
-        params.headers = headers
+        params.headers = handleHeaders
     }
     return next(url, params)
 }
