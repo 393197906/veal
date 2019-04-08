@@ -7,22 +7,27 @@ const babelPlugin = babel({
   exclude: 'node_modules/**',
   runtimeHelpers: true
 });
+
+const generateConfig = (name)=>{
+    return {
+      input: `src/${name}/index.js`,
+      output: { file: `lib/${name}.js`,name:`${name}`, format: 'umd', indent: false },
+      plugins: [babelPlugin,resolve(),commonjs()]
+    }
+}
 export default [
-  {
-    input: 'src/index.js',
-    output: { file: 'lib/aook.js',name:"aook", format: 'umd', indent: false },
-    plugins: [babelPlugin,resolve(),commonjs()]
-  },
-  {
-    input: 'src/index.js',
-    output: { file: 'lib/aook.min.js',name:"aook", format: 'umd', indent: false },
-    plugins: [babelPlugin,resolve(),commonjs(), terser({
-      compress: {
-        pure_getters: true,
-        unsafe: true,
-        unsafe_comps: true,
-        warnings: false
-      }
-    })]
-  },
+  generateConfig("core"),
+  generateConfig("http"),
+  // {
+  //   input: 'src/index.js',
+  //   output: { file: 'lib/aook.min.js',name:"aook", format: 'umd', indent: false },
+  //   plugins: [babelPlugin,resolve(),commonjs(), terser({
+  //     compress: {
+  //       pure_getters: true,
+  //       unsafe: true,
+  //       unsafe_comps: true,
+  //       warnings: false
+  //     }
+  //   })]
+  // },
 ]

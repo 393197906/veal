@@ -1,4 +1,4 @@
-import {mergeOptions, isPlainObject} from "../util"
+import {mergeOptions, isPlainObject} from "../core"
 
 const defaultParams = {
     method: 'GET',

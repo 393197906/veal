@@ -1,8 +1,8 @@
 // import 'promise-polyfill/src/polyfill';
 // import 'whatwg-fetch'
 import fetch from "./fetch"
-import {isFunction, compose} from "../util"
-import {GET, POST, DELETE, PUT,base} from "./methodMiddleware"
+import {isFunction, compose} from "../core"
+export * from "./methodMiddleware"
 
 /**
  * 创建fetch
@@ -22,16 +22,9 @@ export const createFetch = (hof) => {
  * @returns {function(*): *}
  */
 export const applyMiddleware = (...middlewares) => {
-    const baseMiddlewares = [base]
     const filterMiddlewares = middlewares.filter(isFunction)
     return fetch => {
-        const chainFetch = compose(...[...filterMiddlewares,...baseMiddlewares])(fetch)
-        return {
-            get:GET(chainFetch),
-            put:PUT(chainFetch),
-            del:DELETE(chainFetch),
-            post:POST(chainFetch),
-        }
+        return  compose(...filterMiddlewares)(fetch)
     }
 };
 

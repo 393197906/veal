@@ -5,7 +5,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "rollup -w -c",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": ["<rootDir>/node_modules/"]
   },
   "dependencies": {
     "is-plain-object": "^2.0.4",
@@ -17,6 +24,7 @@
     "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/preset-env": "^7.4.1",
     "@babel/runtime": "^7.4.0",
+    "babel-jest": "^24.7.1",
     "jest": "^24.5.0",
     "rollup": "^1.7.0",
     "rollup-plugin-babel": "^4.3.2",
