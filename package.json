@@ -39,5 +39,8 @@
     "type": "git",
     "url": "https://github.com/393197906/aook"
   },
-  "bugs":{"url":"https://github.com/393197906/aook/issues","email":"393197906@qq.com"}
+  "bugs": {
+    "url": "https://github.com/393197906/aook/issues",
+    "email": "393197906@qq.com"
+  }
 }
