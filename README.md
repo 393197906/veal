@@ -38,7 +38,7 @@ export const regexp = {
 > 字符串截取
 
 * fixedTo
-> (val:(string|number),len:number=4?)=> number
+> (val:(string\|number),len:number=4?)=> number
 
 > 四舍五入保留n位小数
 
