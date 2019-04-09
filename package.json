@@ -1,7 +1,6 @@
 {
-  "name": "aook",
-  "version": "1.0.0",
-  "main": "lib/aook.js",
+  "name": "veal",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "dev": "rollup -w -c",
