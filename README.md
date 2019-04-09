@@ -147,10 +147,10 @@ math.round(0.105, 2);            // = 0.11, not 0.1
 > [`core`](#core)挂载入口
 
 * Vue.prototype.$_math
-> `math`挂载入口
+> [`math`](#math)挂载入口
 
 * Vue.filters
-> `core`挂载
+> [`core`](#core)挂载
 
 ### components
 * Cache
