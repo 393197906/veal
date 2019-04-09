@@ -144,7 +144,7 @@ math.round(0.105, 2);            // = 0.11, not 0.1
 
 ## vue
 * Vue.prototype.$_util 
-> `core`挂载入口
+> [`core`](#core)挂载入口
 
 * Vue.prototype.$_math
 > `math`挂载入口
