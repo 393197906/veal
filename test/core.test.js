@@ -1,4 +1,4 @@
-import * as core from "../lib/core"
+import * as core from "../core"
 
 test("isPlainObject", () => {
     expect(core.isPlainObject({name: 1})).toBe(true)

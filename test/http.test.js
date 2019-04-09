@@ -1,4 +1,4 @@
-import {createFetch, applyMiddleware, methods, filter, log, headers} from "../lib/http"
+import {createFetch, applyMiddleware, methods, filter, log, headers} from "../http"
 
 const heeaders = {
     'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImFkbWluIiwicmVhbF9uYW1lIjoi5a6L5bCP5a6dIiwiaWF0IjoxNTQwNTQxNDIxLCJleHAiOjE1NDExNDYyMjF9.t4g_gM7DAPhKy2gQL9e-ckYFUPQc1AIZS-0LhtvGAlg"
