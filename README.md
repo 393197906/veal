@@ -17,7 +17,7 @@ export const regexp = {
 ```
 
 * formatDate
-> (data:(string|number),fmt:string?)=> string
+> (data:(string\|number),fmt:string?)=> string
 
 > 将时间戳格式化为日期字符串
 
