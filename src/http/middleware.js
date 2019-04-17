@@ -32,9 +32,9 @@ export const methods = next => {
 export const filter = (errorHandler = () => {
 }, chain) => {
     const defaultChain = response => {
-        if (response.status !== 200) {
-            throw new Error(response.statusText)
-        }
+        // if (response.status !== 200) {
+        //     throw new Error(response.statusText)
+        // }
         return response.json().then(data => {
             if (
                 (data.hasOwnProperty("status") && (data['status'] !== true && parseInt(data['status']) !== 200))

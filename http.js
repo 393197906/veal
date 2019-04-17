@@ -971,10 +971,9 @@ var filter = function filter(errorHandler, chain) {
   }
 
   var defaultChain = function defaultChain(response) {
-    if (response.status !== 200) {
-      throw new Error(response.statusText);
-    }
-
+    // if (response.status !== 200) {
+    //     throw new Error(response.statusText)
+    // }
     return response.json().then(function (data) {
       if (data.hasOwnProperty("status") && data['status'] !== true && parseInt(data['status']) !== 200 || data.hasOwnProperty("code") && data['code'] !== true && parseInt(data['code']) !== 200 || data.hasOwnProperty("state") && data['state'] !== true && parseInt(data['state']) !== 200) {
         throw {
