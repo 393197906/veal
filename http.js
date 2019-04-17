@@ -977,7 +977,10 @@ var filter = function filter(errorHandler, chain) {
 
     return response.json().then(function (data) {
       if (data.hasOwnProperty("status") && data['status'] !== true && parseInt(data['status']) !== 200 || data.hasOwnProperty("code") && data['code'] !== true && parseInt(data['code']) !== 200 || data.hasOwnProperty("state") && data['state'] !== true && parseInt(data['state']) !== 200) {
-        throw new Error(data.message || data.msg || data.ldata || "error message not found");
+        throw {
+          statusCode: data.status || data.code || data.errorcode,
+          message: data.message || data.msg || data.ldata || "error message not found"
+        };
       }
 
       return data;

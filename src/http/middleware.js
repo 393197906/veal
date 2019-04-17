@@ -43,7 +43,10 @@ export const filter = (errorHandler = () => {
                 ||
                 (data.hasOwnProperty("state") && (data['state'] !== true && parseInt(data['state']) !== 200))
             ) {
-                throw new Error(data.message || data.msg || data.ldata || "error message not found")
+                throw {
+                    statusCode:data.status || data.code || data.errorcode,
+                    message:(data.message || data.msg || data.ldata || "error message not found")
+                }
             }
             return data
         })
