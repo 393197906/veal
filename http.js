@@ -857,23 +857,6 @@ var isPlainObject = function isPlainObject(o) {
 var isFunction = function isFunction(fn) {
   return typeof fn === "function";
 }; // deep merge object
-
-var mergeOptions = function mergeOptions(sOptions, eOptions) {
-  return _extends({}, Object.keys(sOptions).reduce(function (container, key) {
-    var _extends2;
-
-    var soption = sOptions[key];
-    var eOption = eOptions[key];
-    var option = soption;
-
-    if (isPlainObject(soption) && isPlainObject(eOption)) {
-      option = mergeOptions(soption, eOption);
-      delete eOptions[key]; // 删除多余属性
-    }
-
-    return _extends({}, container, (_extends2 = {}, _extends2[key] = option, _extends2));
-  }, {}), eOptions);
-};
 function compose() {
   for (var _len = arguments.length, funcs = new Array(_len), _key = 0; _key < _len; _key++) {
     funcs[_key] = arguments[_key];
@@ -912,20 +895,14 @@ var urlEncode = function urlEncode(param, key, encode) {
   return paramStr;
 };
 
-var defaultParams = {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-};
 var fetch$1 = (function (url, params) {
   if (params === void 0) {
     params = {};
   }
 
-  if (!isPlainObject(params)) throw new Error("params except a plain object");
-  var endParams = mergeOptions(defaultParams, params);
-  return window.fetch(url, endParams);
+  if (!isPlainObject(params)) throw new Error("params except a plain object"); // const endParams = mergeOptions(defaultParams, params)
+
+  return window.fetch(url, params);
 });
 
 var methods$1 = function methods(next) {
