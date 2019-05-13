@@ -1,8 +1,11 @@
-import isPlainObject from "is-plain-object";
-export {isPlainObject}
+import {default as ipb} from "is-plain-object";
+import {Regexps,PlainObject} from "./types"
+export const isPlainObject = (value:any):boolean=>{
+        return ipb(value)
+}
 
 // 常用正则
-export const regexp = {
+export const regexp:Regexps = {
     number: /^[0-9]*\.?[0-9]*$/, // 数字
     float: /^(-?\d+)(\.\d+)?$/, // 浮点数
     zh: /^[\u4e00-\u9fa5]{0,}$/, // 汉字
@@ -11,7 +14,7 @@ export const regexp = {
     email:/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/ // 邮箱
 }
 
-export function formatDate (date, fmt) {
+export function formatDate (date:number, fmt:string='yyyy-MM-dd hh:mm:ss'):string {
     if (!date) {
         return ''
     }
@@ -20,7 +23,7 @@ export function formatDate (date, fmt) {
     // }
     date *= (date.toString().length === 10 ? 1000 : 1)
     let _date = new Date(date)
-    let _fmt = fmt || 'yyyy-MM-dd hh:mm:ss'
+    let _fmt = fmt
     let o = {
         'M+': _date.getMonth() + 1,
         'd+': _date.getDate(),
@@ -39,15 +42,15 @@ export function formatDate (date, fmt) {
     return _fmt
 }
 
-export const dateToStamp =  (str, len = 10)=> {
-    let date = new Date(str)
-    return parseInt(date.getTime() / (len === 13 ? 1 : 1000))
+export const dateToStamp =  (str:string, len:number = 10):number=> {
+    let date:Date = new Date(str)
+    return parseInt(`${date.getTime() / (len === 13 ? 1 : 1000)}`)
 }
 
 
-export function deepClone (source) {
+export function deepClone<T> (source:T):T {
     if (!source && typeof source !== 'object') {
-        throw new Error('error arguments', 'shallowClone')
+        throw new Error('error arguments')
     }
     const targetObj = source.constructor === Array ? [] : {}
     Object.keys(source).forEach((keys) => {
@@ -56,12 +59,12 @@ export function deepClone (source) {
             targetObj[keys] = deepClone(source[keys])
         } else {
             targetObj[keys] = source[keys]
-        }
+    }
     })
-    return targetObj
+    return targetObj as T
 }
 
-export const sublen = (value, length = 8) => {
+export const sublen = (value:string, length:number = 8):string => {
     if (!value) return ''
     return value.length > length ? `${value.substr(0, length)}...` : value
 }
@@ -73,15 +76,15 @@ export const sublen = (value, length = 8) => {
  * @param len 默认保留两位小数
  * @returns {string}
  */
-export function fixedTo (val, len = 4) {
-    const temp = parseFloat(val).toFixed(len)
-    if (!isNaN(temp)) {
+export function fixedTo (val:number|string, len = 4):string {
+    const temp = parseFloat(`${val}`).toFixed(len)
+    if (!isNaN(parseFloat(temp))) {
         return temp
     }
     if (val === '') {
         return ''
     }
-    return 0
+    return '0'
 }
 
 /**
@@ -91,8 +94,8 @@ export function fixedTo (val, len = 4) {
  * @param mustDelay 必然触发执行的间隔时间
  * @returns {*}
  */
-export function delayFn (fn, delay, mustDelay) {
-    let timer = null
+export function delayFn (fn:Function, delay:number, mustDelay:number):Function {
+    let timer:any = null
     let tStart
     return function () {
         let context = this
@@ -116,12 +119,12 @@ export function delayFn (fn, delay, mustDelay) {
     }
 }
 
-export const isFunction = (fn) =>{
+export const isFunction = (fn:any):boolean =>{
     return typeof fn === "function"
 }
 
 // deep merge object
-export const mergeOptions = (sOptions, eOptions) => {
+export const mergeOptions = (sOptions:PlainObject, eOptions:PlainObject):PlainObject => {
     return {
         ...Object.keys(sOptions).reduce((container, key) => {
             const soption = sOptions[key]
@@ -137,7 +140,7 @@ export const mergeOptions = (sOptions, eOptions) => {
     }
 }
 
-export function compose (...funcs) {
+export function compose (...funcs:Function[]):Function {
     if (funcs.length === 0) {
         return arg => arg
     }
@@ -149,7 +152,7 @@ export function compose (...funcs) {
     return funcs.reduce((a, b) => (...args) => a(b(...args)))
 }
 
-export function curry (fn) {
+export function curry (fn:Function):Function {
     const arity = fn.length
     return (function resolver () {
         const mem = Array.prototype.slice.call(arguments)
@@ -162,15 +165,15 @@ export function curry (fn) {
 }
 
 
-export  const urlEncode = (param, key, encode)=> {
+export  const urlEncode = (param:any, key:string='', encode:boolean=false)=> {
     if (param==null) return '';
     let paramStr = '';
     const t = typeof (param);
     if (t === 'string' || t === 'number' || t === 'boolean') {
-        paramStr += '&' + key + '='  + ((encode==null||encode) ? encodeURIComponent(param) : param);
+        paramStr += '&' + key + '='  + (encode ? encodeURIComponent(param) : param);
     } else {
         for (let i in param) {
-            let k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i)
+            let k = key === '' ? i  : key + (param instanceof Array ? `[${i}]` : `.${i}`)
             paramStr += urlEncode(param[i], k, encode)
         }
     }

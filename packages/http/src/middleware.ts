@@ -1,6 +1,6 @@
-import {urlEncode, isPlainObject} from "../core"
-
-export const methods = next => {
+import {urlEncode, isPlainObject} from "@veal/core"
+import {Middleware,Result,PlainObject,Fetch,Methods,Chain} from "./types"
+export const methods:Middleware<Fetch<Result<any>>,Methods> = next => {
     const methods = ['GET', 'POST', 'DELETE', 'PUT']
     const methodNames = ['get', 'post', 'del', 'put']
     return methods.reduce((container, key, index) => {
@@ -9,7 +9,7 @@ export const methods = next => {
                 ...container,
                 [methodNames[index]]: (...args) => {
                     const [url, params] = args
-                    const strParams = urlEncode(params).slice(1)
+                    const strParams = urlEncode(params)
                     return next(`${url}${strParams ? `?${strParams}` : ""}`, {
                         method: 'GET',
                     })
@@ -26,11 +26,10 @@ export const methods = next => {
                 })
             }
         }
-    }, {})
+    }, {}) as Methods
 }
 
-export const filter = (errorHandler = () => {
-}, chain) => {
+export const filter = (errorHandler:Function = error=>error, chain:Chain = undefined):Middleware<Fetch<Promise<Response>>,Fetch<Promise<Result<any>>>> => {
     const defaultChain = response => {
         // if (response.status !== 200) {
         //     throw new Error(response.statusText)
@@ -71,7 +70,7 @@ export const filter = (errorHandler = () => {
     }
 };
 
-export const headers = (headers = {}) => next => (...argv) => {
+export const headers = (headers:PlainObject = {}):Middleware<Fetch<Promise<any>>,Fetch<Promise<any>>> => next => (...argv) => {
     let [url, params = {}] = argv
     const handleHeaders = Object.keys(headers).reduce((conatiner, key) => {
         const item = typeof headers[key] === "function" ? headers[key]() : headers[key]
@@ -89,7 +88,7 @@ export const headers = (headers = {}) => next => (...argv) => {
 }
 
 
-export const log = next => (...params) => {
+export const log:Middleware<Fetch<Promise<any>>,Fetch<Promise<any>>> = next => (...params) => {
     const [url, argv] = params
     const start = Date.now()
     return next(...params).then(data => {

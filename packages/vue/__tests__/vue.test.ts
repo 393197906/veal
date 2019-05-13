@@ -1,8 +1,9 @@
-import plugin from "../vue"
+import plugin from "../lib/index"
 
 import Vue from "vue"
 Vue.use(plugin, {mixin: {page: 10}})
-const vue = new Vue()
+
+const vue = new Vue() as any
 test("math", () => {
     expect(vue.$_math.plus(1, 2)).toBe(3)
 })

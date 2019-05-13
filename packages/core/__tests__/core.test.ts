@@ -1,4 +1,4 @@
-import * as core from "../core"
+import * as core from "../src/index"
 
 test("isPlainObject", () => {
     expect(core.isPlainObject({name: 1})).toBe(true)
