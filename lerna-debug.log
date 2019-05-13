@@ -1,0 +1,10 @@
+0 silly argv { _: [ 'add' ],
+0 silly argv   scope: '=@veal/http',
+0 silly argv   globs: [],
+0 silly argv   lernaVersion: '3.10.7',
+0 silly argv   '$0': '..\\..\\AppData\\Roaming\\npm\\node_modules\\lerna\\cli.js',
+0 silly argv   pkg: '@vael/core' }
+1 notice cli v3.10.7
+2 verbose rootPath C:\Users\39319\coding\veal
+3 error Error: 404 Not Found - GET https://registry.npmjs.org/@vael%2fcore - Not found
+3 error     at res.buffer.catch.then.body (C:\Users\39319\AppData\Roaming\npm\node_modules\lerna\node_modules\npm-registry-fetch\check-response.js:104:15)
