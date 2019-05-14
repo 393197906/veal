@@ -61,4 +61,19 @@ describe('@veal/observable', () => {
         expect(isObservable(obj)).toBe(false)
         expect(isObservable(store)).toBe(true)
     })
+
+    test("test",()=>{
+        let count = 0
+        const store = observable({
+            name:'veal',
+            age:18,
+            setName(){
+                this.name = "newVeal"
+                this.age = 20
+            }
+        })
+        observe(()=>++count,{lazy:true})
+        store.setName()
+        expect(count).toBe(2)
+    })
 });
