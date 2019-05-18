@@ -32,21 +32,9 @@ if (buildCode === 1) {
   process.exit(1);
 }
 
-const cp = fork(
-  join(process.cwd(), 'lerna'),
-  ['publish'].concat(process.argv.slice(2)),
-  {
-    stdio: 'inherit',
-    cwd: process.cwd(),
-  },
-);
-cp.on('error', err => {
-  console.log(err);
-});
-cp.on('close', code => {
-  console.log('code', code);
-  if (code === 1) {
-    console.error('Failed: lerna publish');
-    process.exit(1);
-  }
-});
+const { code: publishCode } = shell.exec('npx lerna publish');
+if(publishCode ===1 ){
+  console.error('Failed: publish');
+  process.exit(1);
+}
+console.log("publish is success");
