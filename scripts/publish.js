@@ -16,12 +16,11 @@ if (
 }
 
 const cwd = process.cwd();
-const ret = shell.exec('./node_modules/.bin/lerna updated').stdout;
+const ret = shell.exec('npx lerna updated').stdout;
 const updatedRepos = ret
   .split('\n')
   .map(line => line.replace('- ', ''))
   .filter(line => line !== '');
-
 if (updatedRepos.length === 0) {
   console.log('No package is updated.');
   process.exit(0);
@@ -34,7 +33,7 @@ if (buildCode === 1) {
 }
 
 const cp = fork(
-  join(process.cwd(), 'node_modules/.bin/lerna'),
+  join(process.cwd(), 'lerna'),
   ['publish', '--skip-npm'].concat(process.argv.slice(2)),
   {
     stdio: 'inherit',
