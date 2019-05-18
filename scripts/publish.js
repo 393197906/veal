@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 //
-// const shell = require('shelljs');
-// const { join } = require('path');
-// const { fork } = require('child_process');
-//
+const shell = require('shelljs');
+const { join } = require('path');
+const { fork } = require('child_process');
+
 // if (
 //   shell
 //     .exec('npm config get registry')
