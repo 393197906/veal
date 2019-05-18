@@ -34,7 +34,7 @@ if (buildCode === 1) {
 
 const cp = fork(
   join(process.cwd(), 'lerna'),
-  ['publish', '--skip-npm'].concat(process.argv.slice(2)),
+  ['publish'].concat(process.argv.slice(2)),
   {
     stdio: 'inherit',
     cwd: process.cwd(),
@@ -49,25 +49,4 @@ cp.on('close', code => {
     console.error('Failed: lerna publish');
     process.exit(1);
   }
-
-  publishToNpm();
 });
-
-function publishToNpm() {
-  console.log(`repos to publish: ${updatedRepos.join(', ')}`);
-  updatedRepos.forEach(repo => {
-    shell.cd(join(cwd, 'packages', repo));
-    const { version } = require(join(cwd, 'packages', repo, 'package.json'));
-    if (
-      version.includes('-rc.') ||
-      version.includes('-beta.') ||
-      version.includes('-alpha.')
-    ) {
-      console.log(`[${repo}] npm publish --tag next`);
-      shell.exec(`npm publish --tag next`);
-    } else {
-      console.log(`[${repo}] npm publish`);
-      shell.exec(`npm publish`);
-    }
-  });
-}
