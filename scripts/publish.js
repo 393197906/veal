@@ -32,7 +32,7 @@ if (buildCode === 1) {
   process.exit(1);
 }
 
-const { code: publishCode } = shell.exec('npx lerna publish');
+const { code: publishCode } = shell.exec('npx lerna publish -y');
 if(publishCode ===1 ){
   console.error('Failed: publish');
   process.exit(1);
