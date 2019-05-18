@@ -50,4 +50,4 @@ export default {
         // console.log('2', this.cache)
         return vnode
     }
-}
+}  as any

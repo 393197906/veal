@@ -8,7 +8,8 @@
     "clean:lib": "lerna run clean:dist",
     "build": "lerna run  build",
     "build:watch": "lerna run  build:watch",
-    "test":"lerna run test"
+    "test": "lerna run test",
+    "publish": "./scripts/publish.js"
   },
   "jest": {
     "transform": {
@@ -19,7 +20,8 @@
     ]
   },
   "devDependencies": {
-    "lerna": "^3.13.4"
+    "lerna": "^3.13.4",
+    "shelljs": "^0.8.3"
   },
   "repository": {
     "type": "git",
