@@ -1,7 +1,9 @@
 # veal
+[![Build Status](https://travis-ci.org/393197906/veal.svg?branch=master)](https://travis-ci.org/393197906/veal)
 > a common tool library
 
 > Provide web service API and common function
+
 
 
 ## core
