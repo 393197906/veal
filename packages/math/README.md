@@ -1,11 +1,11 @@
-# `@veal/math`
+# `@aev/math`
 
 > TODO: description
 
 ## Usage
 
 ```
-const math = require('@veal/math');
+const math = require('@aev/math');
 
 // TODO: DEMONSTRATE API
 ```

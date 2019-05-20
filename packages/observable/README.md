@@ -1,11 +1,11 @@
-# `@veal/observable`
+# `@aev/observable`
 
 > TODO: description
 
 ## Usage
 
 ```
-const observable = require('@veal/observable');
+const observable = require('@aev/observable');
 
 // TODO: DEMONSTRATE API
 ```

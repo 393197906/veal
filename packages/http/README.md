@@ -1,11 +1,11 @@
-# `@veal/http`
+# `@aev/http`
 
 > TODO: description
 
 ## Usage
 
 ```
-const http = require('@veal/http');
+const http = require('@aev/http');
 
 // TODO: DEMONSTRATE API
 ```

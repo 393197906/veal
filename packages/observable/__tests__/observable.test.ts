@@ -1,6 +1,6 @@
 import {action, observable, observe, unobserve,isObservable} from "../src/index"
 
-describe('@veal/observable', () => {
+describe('@aev/observable', () => {
     test("observable",()=>{
         const store = observable({
             name:123,

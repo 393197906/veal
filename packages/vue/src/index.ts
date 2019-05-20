@@ -1,6 +1,6 @@
-import * as  core from '@veal/core'
+import * as  core from '@aev/core'
 import {pagination} from './mixin/page'
-import * as math from '@veal/math'
+import * as math from '@aev/math'
 import Cache from './components/Cache.js'
 
 type PlainObject = {[key:string]:any}

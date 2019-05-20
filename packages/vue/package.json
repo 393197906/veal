@@ -1,5 +1,5 @@
 {
-  "name": "@veal/vue",
+  "name": "@aev/vue",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "mr.xie <393197906@qq.com>",
@@ -39,9 +39,9 @@
     "url": "https://github.com/393197906/aook/issues"
   },
   "dependencies": {
-    "@veal/core": "^0.0.0",
-    "@veal/http": "^0.0.0",
-    "@veal/math": "^0.0.0"
+    "@aev/core": "^0.0.0",
+    "@aev/http": "^0.0.0",
+    "@aev/math": "^0.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.12",
@@ -51,5 +51,6 @@
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.3",
     "vue": "^2.6.10"
-  }
+  },
+  "gitHead": "4d58d05f4e4f9a26e34422e3ead58f14d91ebcfe"
 }

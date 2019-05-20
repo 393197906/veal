@@ -1,4 +1,4 @@
-import {urlEncode, isPlainObject} from "@veal/core"
+import {urlEncode, isPlainObject} from "@aev/core"
 import {Middleware,Result,PlainObject,Fetch,Methods,Chain} from "./types"
 export const methods:Middleware<Fetch<Result<any>>,Methods> = next => {
     const methods = ['GET', 'POST', 'DELETE', 'PUT']

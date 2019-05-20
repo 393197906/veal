@@ -1,5 +1,5 @@
 {
-  "name": "@veal/observable",
+  "name": "@aev/observable",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "mr.xie <393197906@qq.com>",
@@ -45,5 +45,6 @@
     "standard-version": "^5.0.2",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.3"
-  }
+  },
+  "gitHead": "4d58d05f4e4f9a26e34422e3ead58f14d91ebcfe"
 }

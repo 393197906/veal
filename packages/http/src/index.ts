@@ -1,6 +1,6 @@
 import 'whatwg-fetch'
 import fetch from "./fetch"
-import {isFunction, compose} from "@veal/core"
+import {isFunction, compose} from "@aev/core"
 export * from "./middleware"
 import {HOF,Middleware,Fetch} from "./types";
 

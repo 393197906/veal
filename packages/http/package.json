@@ -1,5 +1,5 @@
 {
-  "name": "@veal/http",
+  "name": "@aev/http",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "mr.xie <393197906@qq.com>",
@@ -39,7 +39,7 @@
     "url": "https://github.com/393197906/aook/issues"
   },
   "dependencies": {
-    "@veal/core": "^0.0.0",
+    "@aev/core": "^0.0.0",
     "promise-polyfill": "^8.1.0",
     "whatwg-fetch": "^3.0.0"
   },
@@ -50,5 +50,6 @@
     "standard-version": "^5.0.2",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.3"
-  }
+  },
+  "gitHead": "4d58d05f4e4f9a26e34422e3ead58f14d91ebcfe"
 }
