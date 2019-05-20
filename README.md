@@ -1,5 +1,7 @@
 # veal
 [![Build Status](https://travis-ci.org/393197906/veal.svg?branch=master)](https://travis-ci.org/393197906/veal)
+[![npm](https://img.shields.io/badge/TypeScript-%E2%9C%93-007ACC.svg)](https://www.typescriptlang.org/) 
+
 > a common tool library
 
 > Provide web service API and common function
