@@ -7,7 +7,6 @@ node_js:
 before_script:
   - npm run bootstrap -- --npm-client=yarn
   - npm run build
-  - npm run bootstrap -- --npm-client=yarn
-script: npm run test
+script: npm run bootstrap -- --npm-client=yarn
 #after_success:
 #  - npm run coveralls
