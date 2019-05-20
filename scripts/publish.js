@@ -34,7 +34,7 @@ if (buildCode === 1) {
 }
 
 const cp = fork(
-    join(process.cwd(), 'node_modules/.bin/lerna'),
+    join(process.cwd(), 'lerna'),
     ['publish', '--skip-npm'].concat(process.argv.slice(2)),
     {
       stdio: 'inherit',
@@ -57,8 +57,9 @@ cp.on('close', code => {
 function publishToNpm() {
   console.log(`repos to publish: ${updatedRepos.join(', ')}`);
   updatedRepos.forEach(repo => {
-    shell.cd(join(cwd, 'packages', repo));
-    const { version } = require(join(cwd, 'packages', repo, 'package.json'));
+    const rpath = repo.split('@aev/')[repo.split('@aev/').length-1]
+    shell.cd(join(cwd, 'packages', rpath));
+    const { version } = require(join(cwd, 'packages', rpath, 'package.json'));
     if (
         version.includes('-rc.') ||
         version.includes('-beta.') ||
