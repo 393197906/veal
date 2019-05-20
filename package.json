@@ -9,7 +9,9 @@
     "build": "lerna run  build",
     "build:watch": "lerna run  build:watch",
     "test": "lerna run test",
-    "publish": "node ./scripts/publish.js"
+    "publish": "node ./scripts/publish.js",
+    "doc:dev": "vuepress dev ./docs",
+    "doc:build": "vuepress build ./docs"
   },
   "jest": {
     "transform": {
@@ -21,7 +23,8 @@
   },
   "devDependencies": {
     "lerna": "^3.13.4",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.3",
+    "vuepress": "^0.14.11"
   },
   "repository": {
     "type": "git",
