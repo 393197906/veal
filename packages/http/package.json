@@ -40,8 +40,8 @@
   },
   "dependencies": {
     "@veal/core": "^0.0.0",
-    "whatwg-fetch": "^3.0.0",
-    "promise-polyfill": "^8.1.0"
+    "promise-polyfill": "^8.1.0",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
