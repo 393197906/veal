@@ -11,6 +11,10 @@ package-lock.json
 _config.yml
 .gitignore
 .babelrc.js
+__tests__
+.rpt2_cache
+
+
 
 
 
