@@ -1,20 +1,27 @@
 import {default as ipb} from "is-plain-object";
-import {Regexps,PlainObject} from "./types"
-export const isPlainObject = (value:any):boolean=>{
-        return ipb(value)
+import {Regexps, PlainObject} from "./types"
+
+export const isPlainObject = (value: any): boolean => {
+    return ipb(value)
 }
 
 // 常用正则
-export const regexp:Regexps = {
+export const regexp: Regexps = {
     number: /^[0-9]*\.?[0-9]*$/, // 数字
     float: /^(-?\d+)(\.\d+)?$/, // 浮点数
     zh: /^[\u4e00-\u9fa5]{0,}$/, // 汉字
     mobilePhone: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/, // 手机号
     telPhone: /^\d{3}-\d{7,8}|\d{4}-\d{7,8}$/, //  固定电话
-    email:/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/ // 邮箱
+    email: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/ // 邮箱
 }
 
-export function formatDate (date:number, fmt:string='yyyy-MM-dd hh:mm:ss'):string {
+/**
+ * 将时间戳格式化为日期字符串
+ * @param date
+ * @param fmt
+ * @return 格式化后的字符串
+ */
+export function formatDate(date: number, fmt: string = 'yyyy-MM-dd hh:mm:ss'): string {
     if (!date) {
         return ''
     }
@@ -42,13 +49,24 @@ export function formatDate (date:number, fmt:string='yyyy-MM-dd hh:mm:ss'):strin
     return _fmt
 }
 
-export const dateToStamp =  (str:string, len:number = 10):number=> {
-    let date:Date = new Date(str)
+/**
+ * 将日期字符串转换为时间戳
+ * @param str
+ * @param len
+ * @return 转换后的时间戳
+ */
+export const dateToStamp = (str: string, len: number = 10): number => {
+    let date: Date = new Date(str)
     return parseInt(`${date.getTime() / (len === 13 ? 1 : 1000)}`)
 }
 
 
-export function deepClone<T> (source:T):T {
+/**
+ * 深拷贝
+ * @param source
+ * @return 深拷贝后的对象
+ */
+export function deepClone<T extends [] | {}>(source: T): T {
     if (!source && typeof source !== 'object') {
         throw new Error('error arguments')
     }
@@ -59,12 +77,18 @@ export function deepClone<T> (source:T):T {
             targetObj[keys] = deepClone(source[keys])
         } else {
             targetObj[keys] = source[keys]
-    }
+        }
     })
     return targetObj as T
 }
 
-export const sublen = (value:string, length:number = 8):string => {
+/**
+ * 截取字符串长度
+ * @param value
+ * @param length
+ * @return 截取后的字符串
+ */
+export const sublen = (value: string, length: number = 8): string => {
     if (!value) return ''
     return value.length > length ? `${value.substr(0, length)}...` : value
 }
@@ -74,9 +98,9 @@ export const sublen = (value:string, length:number = 8):string => {
  * 四舍五入保留n位小数
  * @param val
  * @param len 默认保留两位小数
- * @returns {string}
+ * @returns 格式化后的字符串
  */
-export function fixedTo (val:number|string, len = 4):string {
+export function fixedTo(val: number | string, len = 4): string {
     const temp = parseFloat(`${val}`).toFixed(len)
     if (!isNaN(parseFloat(temp))) {
         return temp
@@ -94,8 +118,8 @@ export function fixedTo (val:number|string, len = 4):string {
  * @param mustDelay 必然触发执行的间隔时间
  * @returns {*}
  */
-export function delayFn (fn:Function, delay:number, mustDelay:number):Function {
-    let timer:any = null
+export function delayFn(fn: Function, delay: number, mustDelay: number): Function {
+    let timer: any = null
     let tStart
     return function () {
         let context = this
@@ -119,19 +143,29 @@ export function delayFn (fn:Function, delay:number, mustDelay:number):Function {
     }
 }
 
-export const isFunction = (fn:any):boolean =>{
+/**
+ * 判断是不是函数
+ * @param fn
+ * @return 结果
+ */
+export const isFunction = (fn: any): boolean => {
     return typeof fn === "function"
 }
 
-// deep merge object
-export const mergeOptions = (sOptions:PlainObject, eOptions:PlainObject):PlainObject => {
+/**
+ * 深度合并对象
+ * @param sOptions
+ * @param eOptions
+ * @return 合并后的对象
+ */
+export const mergeOptions = (sOptions: PlainObject, eOptions: PlainObject): PlainObject => {
     return {
         ...Object.keys(sOptions).reduce((container, key) => {
             const soption = sOptions[key]
             const eOption = eOptions[key]
             let option = soption;
-            if(isPlainObject(soption)&& isPlainObject(eOption)){
-                option = mergeOptions(soption,eOption)
+            if (isPlainObject(soption) && isPlainObject(eOption)) {
+                option = mergeOptions(soption, eOption)
                 delete eOptions[key] // 删除多余属性
             }
             return {...container, [key]: option}
@@ -140,7 +174,12 @@ export const mergeOptions = (sOptions:PlainObject, eOptions:PlainObject):PlainOb
     }
 }
 
-export function compose (...funcs:Function[]):Function {
+/**
+ * 函数组合
+ * @param funcs
+ * @return 组合后的函数
+ */
+export function compose(...funcs: Function[]): Function {
     if (funcs.length === 0) {
         return arg => arg
     }
@@ -152,9 +191,14 @@ export function compose (...funcs:Function[]):Function {
     return funcs.reduce((a, b) => (...args) => a(b(...args)))
 }
 
-export function curry (fn:Function):Function {
+/**
+ * 函数柯里化
+ * @param fn
+ * @return 柯里化后的函数
+ */
+export function curry(fn: Function): Function {
     const arity = fn.length
-    return (function resolver () {
+    return (function resolver() {
         const mem = Array.prototype.slice.call(arguments)
         return function () {
             const args = mem.slice()
@@ -164,16 +208,22 @@ export function curry (fn:Function):Function {
     }())
 }
 
-
-export  const urlEncode = (param:any, key:string='', encode:boolean=false)=> {
-    if (param==null) return '';
+/**
+ * 转换对象为get参数
+ * @param param
+ * @param key
+ * @param encode
+ * @return  转换后的字符串
+ */
+export const urlEncode = (param: any, key: string = '', encode: boolean = false) => {
+    if (param == null) return '';
     let paramStr = '';
     const t = typeof (param);
     if (t === 'string' || t === 'number' || t === 'boolean') {
-        paramStr += '&' + key + '='  + (encode ? encodeURIComponent(param) : param);
+        paramStr += '&' + key + '=' + (encode ? encodeURIComponent(param) : param);
     } else {
         for (let i in param) {
-            let k = key === '' ? i  : key + (param instanceof Array ? `[${i}]` : `.${i}`)
+            let k = key === '' ? i : key + (param instanceof Array ? `[${i}]` : `.${i}`)
             paramStr += urlEncode(param[i], k, encode)
         }
     }
