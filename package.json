@@ -11,8 +11,8 @@
     "test": "lerna run test",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "publish": "node ./scripts/publish.js",
-    "doc:dev": "vuepress dev ./docs",
-    "doc:build": "vuepress build ./docs"
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "jest": {
     "transform": {
