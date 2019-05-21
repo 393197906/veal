@@ -1,6 +1,7 @@
 # veal
 [![Build Status](https://travis-ci.org/393197906/veal.svg?branch=master)](https://travis-ci.org/393197906/veal)
 [![npm](https://img.shields.io/badge/TypeScript-%E2%9C%93-007ACC.svg)](https://www.typescriptlang.org/) 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a57a9a3d-5f33-44c7-a280-e2a6aefbd0d5/deploy-status)](https://app.netlify.com/sites/aev/deploys)
 
 > a common tool library
 
