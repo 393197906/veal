@@ -1,6 +1,6 @@
 {
   "name": "@aev/vue",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "> TODO: description",
   "author": "mr.xie <393197906@qq.com>",
   "homepage": "https://github.com/393197906/aook#readme",
@@ -39,7 +39,7 @@
     "url": "https://github.com/393197906/aook/issues"
   },
   "dependencies": {
-    "@aev/core": "^0.0.0",
+    "@aev/core": "^0.0.1",
     "@aev/http": "^0.0.0",
     "@aev/math": "^0.0.0"
   },
