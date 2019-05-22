@@ -1,5 +1,5 @@
 import {default as ipb} from "is-plain-object";
-import {Regexps, PlainObject} from "./types"
+import {Regexps, PlainObject, Times, RangeResult} from "./types"
 
 export const isPlainObject = (value: any): boolean => {
     return ipb(value)
@@ -13,6 +13,35 @@ export const regexp: Regexps = {
     mobilePhone: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/, // 手机号
     telPhone: /^\d{3}-\d{7,8}|\d{4}-\d{7,8}$/, //  固定电话
     email: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/ // 邮箱
+}
+
+/**
+ * 判断是否有重复的区间
+ * @param avgs [T extends number | string,T extends number | string][]
+ * @return 重复的结果集 { [key: number]: Times }[]
+ */
+export function hasRangeRepeat<T extends number | string>(...avgs: Times<T>[]): RangeResult<T> {
+    const getMax = (a1: T, a2: T): T => a1 < a2 ? a2 : a1
+    const getMin = (a1: T, a2: T): T => a1 < a2 ? a1 : a2
+    const container: RangeResult<T> = []
+    const items = [...avgs]
+    let index = 0
+    while (items.length>1){
+        items.reduce((left: Times<T>, right: Times<T>, currentIndex: number): Times<T> => {
+            const max = [left[0], right[0]]
+            const min = [left[1], right[1]]
+            if (getMax.apply(null, max) <= getMin.apply(null, min)) {
+                container.push({
+                    [index]: left,
+                    [currentIndex+index]: right
+                })
+            }
+            return left
+        })
+        items.shift()
+        index++
+    }
+    return container
 }
 
 /**

@@ -1,5 +1,5 @@
 import * as core from "../src/index"
-
+import {Times} from "../src/types"
 test("isPlainObject", () => {
     expect(core.isPlainObject({name: 1})).toBe(true)
     expect(core.isPlainObject(undefined)).toBe(false)
@@ -114,14 +114,35 @@ test("dateToStamp", () => {
 
 test("deepClone", () => {
     const target = {
-        name:"11",
-        age:18,
-        body:{
-            name:"22",
-            age:19
+        name: "11",
+        age: 18,
+        body: {
+            name: "22",
+            age: 19
         }
     };
     expect(core.deepClone(target)).not.toBe(target)
+})
+
+test("hasRangeRepeat", () => {
+    const a1:Times<string> = ["09:00", "09:02"]
+    const a2:Times<string> = ["09:10", "10:02"]
+    const a3:Times<string> = ["09:00:", "09:01"]
+    const a4:Times<string> = ["09:11:", "09:18"]
+    const a5:Times<string> = ["09:01:", "09:02"]
+    expect(!!core.hasRangeRepeat<string>(a1, a2,a3,a4,a5).length).toBe(true)
+
+    const b1:Times<number> = [0,10]
+    const b2:Times<number> = [11,20]
+    const b3:Times<number> = [20,25]
+    const b4:Times<number> = [4,7]
+    expect(!!core.hasRangeRepeat<number>(b1,b2,b3,b4).length).toBe(true)
+
+    const c1:Times<number> = [0,10]
+    const c2:Times<number> = [11,20]
+    const c3:Times<number> = [22,25]
+    const c4:Times<number> = [30,31]
+    expect(!!core.hasRangeRepeat<number>(c1,c2,c3,c4).length).toBe(false)
 })
 
 

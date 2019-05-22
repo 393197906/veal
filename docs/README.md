@@ -21,6 +21,16 @@ export const regexp = {
     email:/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/ // 邮箱
 }
 ```
+### hasRangeRepeat
+```typescript
+/**
+ * 判断是否有重复的区间
+ * @param avgs [T extends number | string,T extends number | string][]
+ * @return 重复的结果集 { [key: number]: Times }[]
+ */
+export declare function hasRangeRepeat<T extends number | string>(...avgs: Times<T>[]): RangeResult<T>;
+```
+
 
 ### formatDate
 ```typescript
