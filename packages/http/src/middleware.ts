@@ -44,7 +44,7 @@ export const filter = (errorHandler:Function = error=>error, chain:Chain = undef
             ) {
                 throw {
                     statusCode:data.status || data.code || data.errorcode,
-                    message:(data.message || data.msg || data.ldata || "error message not found")
+                    message:(data.message || data.msg || data.data || "error message not found")
                 }
             }
             return data
